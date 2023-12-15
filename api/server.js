@@ -8,7 +8,7 @@ const app = express();
 app.use(
   cors({
     origin: [
-      "http://localhost:3000",
+      "https://trouvailler.com", "https://admin.trouvailler.com"
     ],
     credentials: true,
   })
