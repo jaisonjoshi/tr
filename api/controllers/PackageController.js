@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const Package = require('../models/Package')
+const Package = require('../models/travelPackages')
 
 
 

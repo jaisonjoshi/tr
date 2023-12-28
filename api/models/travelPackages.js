@@ -91,4 +91,4 @@ const packageSChema = new mongoose.Schema(
     },{timeseries:true}
 )
 
-module.exports = mongoose.model('Package', packageSChema)
+module.exports = mongoose.model('travelPackages', packageSChema)
