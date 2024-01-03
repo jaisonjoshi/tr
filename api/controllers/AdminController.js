@@ -15,7 +15,7 @@ const login = async (req, res) => {
 
     const admin = await Admin.findOne({ email });
     if (!admin)
-      return res.status(401).json({ errorMessage: "Wrong email or password." });
+      return res.status(401).json({ errorMessage: "Wrong email or password. hey" });
     const passwordCorrect = await bcrypt.compare(password, admin.passwordHash);
     if (!passwordCorrect)
       return res.status(401).json({ errorMessage: "Wrong email or password." });
@@ -68,5 +68,8 @@ const loggedin = async (req, res) => {
     res.json(false);
   }
 };
+
+
+
 
 module.exports = { login, logout, loggedin };

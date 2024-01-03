@@ -7,11 +7,11 @@ import axiosInstance from "../../../utils/axiosInstance";
 import axios from "axios";
 
 
-export const Activities = ({activityOpen, setActivityOpen, pack, reFetch}) => {
+export const PlacesToVisit = ({placesToVisitOpen, setPlacesToVisitOpen, pack, reFetch}) => {
     const {setNotificationMessage} = useContext(MyContext)
-    const [openAddActivity, setOpenAddActivity] = useState(false)
-    const [activityLoading, setActivityLoading] = useState(false);
-    const [newActivityLoading, setNewActivityLoading] = useState(false)
+    const [openAddPlace, setOpenAddPlace] = useState(false)
+    const [placeLoading, setPlaceLoading] = useState(false);
+    const [newPlaceLoading, setNewPlaceLoading] = useState(false)
     
 
       const [info, setinfo] = useState({});
@@ -20,10 +20,10 @@ export const Activities = ({activityOpen, setActivityOpen, pack, reFetch}) => {
         console.log(info);
       };
       const handleClose = () => {
-        setActivityOpen(false);
+        setPlacesToVisitOpen(false);
         setinfo({})
-        setOpenAddActivity(false)
-        document.getElementById('new-activity').reset()
+        setOpenAddPlace(false)
+        document.getElementById('new-place').reset()
 
       };
 
@@ -35,15 +35,13 @@ export const Activities = ({activityOpen, setActivityOpen, pack, reFetch}) => {
       const [file, setFile] = useState(null);
       
 
-    const [activities, setActivities] = useState([])
-    const [existingActivities, setExistingActivities] = useState([])
+    const [existingPlaces, setExistingPlaces] = useState([])
       useEffect(()=>{
-        setExistingActivities(pack.activities)
-      },[pack,activityOpen])
+        setExistingPlaces(pack.places)
+      },[pack,placesToVisitOpen])
 
       const handleImageChange = (e) => {
         const file = e.target.files[0];
-        console.log("hello")
         if (file) {
           setFile(file);
           
@@ -55,16 +53,16 @@ export const Activities = ({activityOpen, setActivityOpen, pack, reFetch}) => {
      
 
 
-      const handleAddNewActivity =  async (e) => {
+      const handleAddNewPlace=  async (e) => {
         e.preventDefault()
         console.log(info)
 
-        if(!info.title || info.title.trim() === "" || !info.description || info.description.trim() === "" || file === null){
-          alert("Please enter all activity fields")
+        if(!info.place || info.place.trim() === ""  || file === null){
+          alert("Please enter all place fields")
         }
         else{
-          setNewActivityLoading(true)
-          let confirmation = window.confirm("Are you sure to upload this activity ?")
+          setNewPlaceLoading(true)
+          let confirmation = window.confirm("Are you sure to upload this Place?")
          if(confirmation){
           console.log(info)
           let url =
@@ -81,41 +79,41 @@ export const Activities = ({activityOpen, setActivityOpen, pack, reFetch}) => {
 
           url = uploadRes.data.url;
         }
-        const newActivity = [
-          ...existingActivities, {...info, img:url}
+        const newPlace = [
+          ...existingPlaces, {...info, img:url}
         ]
-          await axiosInstance.patch(`/package/${pack._id}`, {activities:newActivity})
-          setOpenAddActivity(false)
-          setNewActivityLoading(false)
+          await axiosInstance.patch(`/package/${pack._id}`, {places:newPlace})
+          setOpenAddPlace(false)
+          setNewPlaceLoading(false)
           reFetch()
-          setNotificationMessage("Uploaded activity successfully")
+          setNotificationMessage("Uploaded place successfully")
           setinfo({})
-          document.getElementById('new-activity').reset()
+          document.getElementById('new-place').reset()
           setFile(null)
          }
         }
         
       }
 
-      const handleAddActivity = (e) => {
+      const handleAddPlace = (e) => {
         e.preventDefault()
-        setOpenAddActivity(true)
+        setOpenAddPlace(true)
 
       }
      
-      const makeExistingActivityDelete = (index) => {
-        setExistingActivities(existingActivities.filter((item,ind)=>(ind !== index)))
+      const makeExistingPlaceDelete = (index) => {
+        setExistingPlaces(existingPlaces.filter((item,ind)=>(ind !== index)))
 
       }
       
       const handleSubmit = async (e) => {
         e.preventDefault();
-        setActivityLoading(true)
+        setPlaceLoading(true)
         try {
-          await axiosInstance.patch(`/package/${pack._id}`, {activities:existingActivities})
-          setActivityLoading(false)
+          await axiosInstance.patch(`/package/${pack._id}`, {places:existingPlaces})
+          setPlaceLoading(false)
           reFetch()
-          setActivityOpen(false)
+          setPlacesToVisitOpen(false)
           setNotificationMessage("Updated Activities")
           
         } catch (error) {
@@ -136,7 +134,7 @@ export const Activities = ({activityOpen, setActivityOpen, pack, reFetch}) => {
         <div>
              <Backdrop
         sx={{ color: "#000", zIndex: (theme) => theme.zIndex.drawer + 1 }}
-        open={activityOpen}
+        open={placesToVisitOpen}
       >
 
 
@@ -160,7 +158,7 @@ export const Activities = ({activityOpen, setActivityOpen, pack, reFetch}) => {
 
         <div className="bg-[white] w-[50%] p-4 rounded max-h-[700px] overflow-scroll no-scrollbar">
           <div className="flex justify-between packs-center border-b pb-4 border-[#e2e2e2]">
-            <h1 className="text-xl font-bold">Activities</h1>
+            <h1 className="text-xl font-bold">Places to Visit</h1>
             <img
               src="/images/icons/Close.png"
               className="w-6 cursor-pointer"
@@ -171,10 +169,10 @@ export const Activities = ({activityOpen, setActivityOpen, pack, reFetch}) => {
 
           <div>
           {
-              existingActivities && existingActivities?.map((item, index)=>(
+              existingPlaces && existingPlaces?.map((item, index)=>(
                 <div key={index} className="relative flex justify-between items-center border bg-[#e2e2e2] border-[#e2e2e2] my-8 px-4 py-4">
                             <div className="absolute top-2 right-2 flex items-center gap-4">
-                        <img src="/images/icons/trash.png" alt="" className="w-5 cursor-pointer" onClick={()=>makeExistingActivityDelete(index)} />
+                        <img src="/images/icons/trash.png" alt="" className="w-5 cursor-pointer" onClick={()=>makeExistingPlaceDelete(index)} />
 
                     </div>
                                       <div className="w-[15%]">
@@ -187,8 +185,7 @@ export const Activities = ({activityOpen, setActivityOpen, pack, reFetch}) => {
 
 
                     <div className="w-[80%]">
-                        <h1 className="font-bold text-xl">{item.title  }</h1>
-                        <p className="text-sm">{item.description}</p>
+                        <h1 className="font-bold text-xl">{item.place  }</h1>
                     </div>
                 </div>
               ))
@@ -196,9 +193,9 @@ export const Activities = ({activityOpen, setActivityOpen, pack, reFetch}) => {
           
             
 
-          {existingActivities  && existingActivities.length === 0 &&  <div className="flex flex-col items-center gap-4 py-8">
+          {existingPlaces  && existingPlaces.length === 0 &&  <div className="flex flex-col items-center gap-4 py-8">
                     <img src="/images/icons/notFound.png" alt="" className="w-20"/>
-                    <h1 className="text-[grey]">No activities added</h1>
+                    <h1 className="text-[grey]">No Places added</h1>
                 </div>}
 
           </div>
@@ -208,23 +205,23 @@ export const Activities = ({activityOpen, setActivityOpen, pack, reFetch}) => {
           <div>
 
             <div className="my-4">
-              <button className="bg-bg text-[white] px-4 py-2 rounded" onClick={handleAddActivity}>Add new activity</button>
+              <button className="bg-bg text-[white] px-4 py-2 rounded" onClick={handleAddPlace}>Add new place</button>
             </div>
 
-            <div className={`border border-[#cbcbcb] px-4 overflow-hidden rounded ${openAddActivity ? "max-h-[1000px]" : "max-h-[0px]" } transition-all duration-300`}>
-              <form action="" id="new-activity" className="py-4">
+            <div className={`border border-[#cbcbcb] px-4 overflow-hidden rounded ${openAddPlace ? "max-h-[1000px]" : "max-h-[0px]" } transition-all duration-300`}>
+              <form action="" id="new-place" className="py-4">
                   <div >
-                        <label className="flex items-center gap-2 cursor-pointer" htmlFor="activity-upload"><img src="/images/icons/upload.png" className="w-8" alt="" /> Upload Image </label>
-                    <input type="file" className="hidden" id="activity-upload" onChange={handleImageChange}/>
+                        <label className="flex items-center gap-2 cursor-pointer" htmlFor="place-upload"><img src="/images/icons/upload.png" className="w-8" alt="" /> Upload Image </label>
+                    <input type="file" className="hidden" id="place-upload" onChange={handleImageChange}/>
 
                     </div>
 
                     <div className="flex flex-col gap-4 mt-8">
-                <label htmlFor="">Activity Title</label>
+                <label htmlFor="">Place Title</label>
                 <input
                   className="bg-[#eeeeee] px-4 py-2 rounded"
                   type="text"
-                  id="title"
+                  id="place"
                   name=""
                   onChange={handleChange}
                 />
@@ -232,17 +229,7 @@ export const Activities = ({activityOpen, setActivityOpen, pack, reFetch}) => {
 
 
 
-              <div className="flex flex-col gap-4 mt-8">
-                <label htmlFor="">Activity Description</label>
-                <input
-                  className="bg-[#eeeeee] px-4 py-2 rounded"
-                  type="text"
-                  id="description"
-                  name=""
-                  onChange={handleChange}
-                />
-              </div>
-
+            
 
 
 
@@ -266,8 +253,7 @@ export const Activities = ({activityOpen, setActivityOpen, pack, reFetch}) => {
 
 
                     <div className="w-[80%]">
-                        <h1 className="font-bold text-xl">{info.title ? info.title : "Activity Title" }</h1>
-                        <p className="text-sm">{info.description ? info.description : "Activity Description" }</p>
+                        <h1 className="font-bold text-xl">{info.place ? info.place : "Place Title" }</h1>
                     </div>
 
 
@@ -278,7 +264,7 @@ export const Activities = ({activityOpen, setActivityOpen, pack, reFetch}) => {
 
 
                       <div className="flex items-center gap-4">
-                        <button className="bg-bg px-4 py-2 text-[white] rounded flex gap-2 items-center" onClick={handleAddNewActivity}>Add activity{newActivityLoading && <ClipLoader color="white" size={18} />}</button>
+                        <button className="bg-bg px-4 py-2 text-[white] rounded flex gap-2 items-center" onClick={handleAddNewPlace}>Add place{newPlaceLoading && <ClipLoader color="white" size={18} />}</button>
                       </div>
 
               </form>
@@ -287,8 +273,8 @@ export const Activities = ({activityOpen, setActivityOpen, pack, reFetch}) => {
             <button
                   className="bg-bg mt-8 w-full flex items-center gap-4 justify-center py-4 cursor-pointer rounded text-[white]" onClick={handleSubmit}
                 >
-                  Update Activities
-                  {activityLoading && <ClipLoader color="white" size={24} />}
+                  Update Places
+                  {placeLoading && <ClipLoader color="white" size={24} />}
                 </button>
           </div>
           

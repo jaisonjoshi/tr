@@ -32,6 +32,18 @@ const Activity = new mongoose.Schema({
     img:{type:String}
 })
 
+
+const Place = new mongoose.Schema({
+    place:{type:String},
+    img:{type:String}
+})
+
+const Featured = new mongoose.Schema({
+    featured:{type:Boolean},
+    order:{type:Number}
+})
+
+
 const packageSChema = new mongoose.Schema(
     {
         uploaded:{
@@ -85,7 +97,11 @@ const packageSChema = new mongoose.Schema(
         },
         activities:{
             type:[Activity]
-        }
+        },
+        places:{
+            type:[Place]
+        },
+        featured:{type:Featured},
 
         
     },{timeseries:true}

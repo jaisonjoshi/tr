@@ -13,6 +13,7 @@ import { Seo } from "./models/Seo"
 import { CardText } from "./models/CardTags"
 import { Activities } from "./models/Activities"
 import { capitaliseFirstLetter } from "../../utils/firstLetterCapitalise"
+import { PlacesToVisit } from "./models/PlacestoVisit"
 
 
 
@@ -34,6 +35,7 @@ const Package = () => {
     const [seoOpen, setSeoOpen] = useState(false)
     const [cardTextOpen, setCardTextOpen] =useState(false)
     const [activityOpen, setActivityOpen] = useState(false)
+    const [placesToVisitOpen, setPlacesToVisitOpen] = useState(false)
     return(
         <div>
       <div className="  ">
@@ -45,6 +47,7 @@ const Package = () => {
        <Seo seoOpen={seoOpen} setSeoOpen={setSeoOpen} pack={pack} reFetch={reFetch} />
        <CardText cardTextOpen={cardTextOpen} setCardTextOpen={setCardTextOpen} pack={pack} reFetch={reFetch} />
         <Activities activityOpen={activityOpen} setActivityOpen={setActivityOpen} pack={pack} reFetch={reFetch} />
+        <PlacesToVisit placesToVisitOpen={placesToVisitOpen} setPlacesToVisitOpen={setPlacesToVisitOpen} pack={pack} reFetch={reFetch} />
        <Navbar />
         <div className=" flex mt-[70px] h-full w-full overflow-auto">
           <Sidebar />
@@ -122,6 +125,13 @@ const Package = () => {
                            <div className="w-[25%]">
                             <img src="/images/icons/activity.png" alt="" className="w-full"/>
                             </div>                            <h1 className="text-lg">Activities</h1>
+                           </div>
+
+
+                           <div onClick={()=>setPlacesToVisitOpen(true)} className="w-[30%] mb-8 cursor-pointer shadow-xl py-8 border border-[#13135a] rounded flex flex-col items-center gap-4">
+                           <div className="w-[25%]">
+                            <img src="/images/icons/placestovisit.png" alt="" className="w-full"/>
+                            </div>                            <h1 className="text-lg">Places To Visit</h1>
                            </div>
 
 
@@ -246,6 +256,27 @@ const Package = () => {
                                     <div className="w-[80%]">
                                         <h1 className="font-bold">{item.title}</h1>
                                         <p className="text-[grey] text-sm">{item.description}</p>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+
+                        </div>
+
+
+
+
+                        <div className=" my-8 bg-[#e2e2e2] p-2 rounded">
+                        <h1 className="mb-4 font-medium">Places to visit </h1>
+
+                        <div>
+                            {pack.places && pack.places.map((item,index)=>(
+                                <div className="bg-[white] mb-2 rounded p-2 flex gap-[5%]">
+                                    <div className="w-[15%]">
+                                        <img src={item.img} alt="" className="w-full" />
+                                    </div>
+                                    <div className="w-[80%]">
+                                        <h1 className="font-bold">{item.place}</h1>
                                     </div>
                                 </div>
                             ))}
