@@ -14,6 +14,8 @@ import { CardText } from "./models/CardTags"
 import { Activities } from "./models/Activities"
 import { capitaliseFirstLetter } from "../../utils/firstLetterCapitalise"
 import { PlacesToVisit } from "./models/PlacestoVisit"
+import { Inclusions } from "./models/Inclusions"
+import { Exclusions } from "./models/Exclusions"
 
 
 
@@ -36,6 +38,14 @@ const Package = () => {
     const [cardTextOpen, setCardTextOpen] =useState(false)
     const [activityOpen, setActivityOpen] = useState(false)
     const [placesToVisitOpen, setPlacesToVisitOpen] = useState(false)
+    const [inclusionsOpen, setInclusionsOpen] = useState(false)
+    const [exclusionsOpen, setExclusionsOpen] = useState(false)
+
+
+
+
+
+
     return(
         <div>
       <div className="  ">
@@ -48,6 +58,9 @@ const Package = () => {
        <CardText cardTextOpen={cardTextOpen} setCardTextOpen={setCardTextOpen} pack={pack} reFetch={reFetch} />
         <Activities activityOpen={activityOpen} setActivityOpen={setActivityOpen} pack={pack} reFetch={reFetch} />
         <PlacesToVisit placesToVisitOpen={placesToVisitOpen} setPlacesToVisitOpen={setPlacesToVisitOpen} pack={pack} reFetch={reFetch} />
+        <Inclusions inclusionsOpen={inclusionsOpen} setInclusionsOpen={setInclusionsOpen} pack={pack} reFetch={reFetch} />
+        <Exclusions exclusionsOpen={exclusionsOpen} setExclusionsOpen={setExclusionsOpen} pack={pack} reFetch={reFetch} />
+
        <Navbar />
         <div className=" flex mt-[70px] h-full w-full overflow-auto">
           <Sidebar />
@@ -132,6 +145,20 @@ const Package = () => {
                            <div className="w-[25%]">
                             <img src="/images/icons/placestovisit.png" alt="" className="w-full"/>
                             </div>                            <h1 className="text-lg">Places To Visit</h1>
+                           </div>
+
+
+
+                           <div onClick={()=>setInclusionsOpen(true)} className="w-[30%] mb-8 cursor-pointer shadow-xl py-8 border border-[#13135a] rounded flex flex-col items-center gap-4">
+                           <div className="w-[25%]">
+                            <img src="/images/icons/inclusions.png" alt="" className="w-full"/>
+                            </div>                            <h1 className="text-lg">Inclusions</h1>
+                           </div>
+
+                           <div onClick={()=>setExclusionsOpen(true)} className="w-[30%] mb-8 cursor-pointer shadow-xl py-8 border border-[#13135a] rounded flex flex-col items-center gap-4">
+                           <div className="w-[25%]">
+                            <img src="/images/icons/exclude.png" alt="" className="w-full"/>
+                            </div>                            <h1 className="text-lg">Exclusions</h1>
                            </div>
 
 
@@ -284,6 +311,39 @@ const Package = () => {
 
                         </div>
 
+
+                        <div className=" my-8 bg-[#e2e2e2] p-2 rounded">
+                        <h1 className="mb-4 font-medium">Inclusions </h1>
+
+                        <div>
+                            {pack.inclusions && pack.inclusions.map((item,index)=>(
+                                <div key={index}>
+                                    <ul>
+                                        <li className="bg-[white] px-2 py-1 rounded mb-2">{item}</li>
+                                    </ul>
+                                </div>
+                            ))}
+                        </div>
+
+                        </div>
+
+
+
+
+                        <div className=" my-8 bg-[#e2e2e2] p-2 rounded">
+                        <h1 className="mb-4 font-medium">Exclusions </h1>
+
+                        <div>
+                            {pack.exclusions && pack.exclusions.map((item,index)=>(
+                                <div key={index}>
+                                    <ul>
+                                        <li className="bg-[white] px-2 py-1 rounded">{item}</li>
+                                    </ul>
+                                </div>
+                            ))}
+                        </div>
+
+                        </div>
 
 
 

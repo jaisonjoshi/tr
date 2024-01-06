@@ -80,7 +80,14 @@ const CreatePackage = () => {
             cardTag1:"",
             cardTag2:""
           },
-          activities:[]
+          activities:[],
+          inclusions:[],
+          exclusions:[],
+          places:[],
+          featured:{
+            featured:false,
+            order:0
+          }
         };
         const res = await axiosInstance.post("/package/new", newPackage);
         console.log(res);

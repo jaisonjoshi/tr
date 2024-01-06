@@ -102,6 +102,9 @@ const packageSChema = new mongoose.Schema(
             type:[Place]
         },
         featured:{type:Featured},
+        inclusions:{type:[String]},
+        exclusions:{type:[String]},
+
 
         
     },{timeseries:true}
