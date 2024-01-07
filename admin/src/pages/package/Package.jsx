@@ -65,8 +65,10 @@ const Package = () => {
         <div className=" flex mt-[70px] h-full w-full overflow-auto">
           <Sidebar />
           <div className=" grow h-full flex fixed w-package right-0  top-[70px]  ">
+
+
                 <div className=" h-full px-8 py-12  grow overflow-scroll no-scrollbar">
-                        <h1 className="text-2xl font-semibold">Update Package</h1>
+                       
                         {loading?  <div className="flex px-8 justify-start mt-40"><ClipLoader /></div> : 
 
 ( error ? (
@@ -78,7 +80,39 @@ const Package = () => {
   ) :
                         
                         (
-                            pack &&
+                            <div>
+                                <h1 className="text-2xl font-bold">{pack.title}</h1>
+
+
+
+                                <div  className="w-full  my-8  shadow-xl py-8 border border-[#13135a] rounded flex flex-col px-4 gap-4">
+                                     {
+                                        pack.uploaded === false && (
+                                            <div>
+                                                <h1 className="text-[red] text-lg">This package is not uploaded to the website. </h1>
+                                                <div className="my-8">
+                                                    <button className="bg-bg w-full flex items-center gap-4 justify-center py-4 cursor-pointer rounded text-[white]">Upload Now</button>
+                                                </div>
+                                            </div>
+                                        )
+                                     }  
+
+                                     {
+                                        pack.uploaded === true && (
+                                            <div>
+                                                <h1>This package is uploaded to the website.</h1>
+                                                <div className="my-8">
+                                                    <button className="bg-bg w-full flex items-center gap-4 justify-center py-4 cursor-pointer rounded text-[white]">Unupload now</button>
+                                                </div>
+                                                
+
+                                            </div>
+                                        )
+                                     }              
+                           </div>
+
+
+                           { pack &&
                             <div className="flex flex-wrap gap-[5%] pt-12">
                            <div onClick={()=>setBasicDetailsOpen(true)} className="w-[30%] mb-8 cursor-pointer shadow-xl py-8 border border-[#13135a] rounded flex flex-col items-center gap-4">
                             <div className="w-[20%]">
@@ -164,7 +198,9 @@ const Package = () => {
 
 
 
-                        </div>
+                        </div>}
+                        
+                            </div>
                         ))}
                 </div>
                 <div className=" h-full px-8 py-12 w-[50%] min-w-[50%]  grow overflow-hidden ">

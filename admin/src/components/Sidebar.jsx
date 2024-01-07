@@ -21,6 +21,10 @@ const Sidebar = () => {
                     <li className="pl-8 py-2 cursor-pointer hover:bg-[#1A2342]">
                         Create Package
                     </li></Link>
+                    <Link to="/package/sections"> 
+                    <li className="pl-8 py-2 cursor-pointer hover:bg-[#1A2342]">
+                        Sections
+                    </li></Link>
                 </ul>
             </div>
         </div>

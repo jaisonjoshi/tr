@@ -11,6 +11,8 @@ import Package from "./pages/package/Package";
 import { Notification } from "./components/Notification";
 import { useContext } from "react";
 import PrivateRoutes from "./PrivateRoutes";
+import Sections from "./pages/package/Sections";
+import SectionDetails from "./pages/package/SectionDetails";
 
 
 function App() {
@@ -28,6 +30,9 @@ function App() {
                   <Route path="unuploadedpackages" element={<Unuploadedpackages />} />
                   <Route path="createpackage" element={<CreatePackage />} />
                   <Route path=":id" element={<Package />} />
+                  <Route path="sections" element={<Sections />} />
+                  <Route path="sections/:id" element={<SectionDetails />} />
+
 
 
                 </Route>

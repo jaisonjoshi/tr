@@ -10,6 +10,17 @@ const getPackages =  async (req, res) => {
     const packages =  await Package.find(query)
     res.status(200).json(packages)
 }
+
+const getSimplifiedPackages = async (req,res) => {
+    const packages = await Package.find({}).select('_id title titleImage').lean()
+    res.status(200).json(packages)
+    console.log(packages)
+
+}
+
+
+
+
 const getPackage = async(req,res)=>{
     const {id}=req.params
     if(!mongoose.Types.ObjectId.isValid(id)){
@@ -30,7 +41,7 @@ const createPackage = async (req, res) => {
         res.status(200).json(package)
 
     } catch (error) {
-        
+        console.log(error)
     }
 }
 
@@ -57,4 +68,4 @@ const updatePackage = async (req,res)=>{
 
 }
 
-module.exports = {createPackage,getPackages, getPackage, updatePackage}
+module.exports = {createPackage,getPackages, getPackage,getSimplifiedPackages, updatePackage}

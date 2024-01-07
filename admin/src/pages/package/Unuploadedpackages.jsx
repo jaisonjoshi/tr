@@ -23,7 +23,7 @@ const Unuploadedpackages = () => {
           <Sidebar />
           <div className="px-8 py-8 grow flex ml-[300px] flex-col">
            <div className="">
-                <h1 className="text-3xl font-medium">Unuploaded Packages</h1>
+                <h1 className="text-3xl font-medium"> Packages Not Uploaded to website</h1>
            </div>
           {loading ? <div className="flex flex-col items-center mt-60"><ClipLoader /><h1 className="text-[grey] mt-4">Fetching data</h1></div> : 
           ( error ? (

@@ -21,7 +21,7 @@ app.use(cookieParser());
 const packagelocationsRoutes = require('./routes/packageLocations')
 const packageRoutes = require('./routes/packageRoutes')
 const AdminRoutes = require('./routes/AdminRoutes')
-
+const CategoryRoutes = require('./routes/CategoryRoutes')
 
 
 
@@ -41,4 +41,4 @@ mongoose
   app.use('/api/packagelocations',packagelocationsRoutes)
   app.use('/api/package',packageRoutes)
   app.use('/api/admin/auth',AdminRoutes)
-
+  app.use('/api/category', CategoryRoutes)
