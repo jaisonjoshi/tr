@@ -13,6 +13,9 @@ import { useContext } from "react";
 import PrivateRoutes from "./PrivateRoutes";
 import Sections from "./pages/package/Sections";
 import SectionDetails from "./pages/package/SectionDetails";
+import Reviews from "./pages/reviews/Reviews";
+import CreateReview from "./pages/reviews/CreateReview";
+import UpdateReview from "./pages/reviews/UpdateReview";
 
 
 function App() {
@@ -35,6 +38,12 @@ function App() {
 
 
 
+                </Route>
+                <Route path="/reviews">
+
+                  <Route index element={<Reviews />} />
+                  <Route path="new" element={<CreateReview />} />
+                  <Route path="update/:id" element={<UpdateReview />} />
                 </Route>
             </Route>
 
