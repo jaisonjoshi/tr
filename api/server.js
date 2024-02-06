@@ -23,7 +23,7 @@ const packageRoutes = require('./routes/packageRoutes')
 const AdminRoutes = require('./routes/AdminRoutes')
 const CategoryRoutes = require('./routes/CategoryRoutes')
 const ReviewRoutes = require('./routes/ReviewRoutes')
-
+const PopularPlacesRoutes = require('./routes/PopularPlacesRoutes')
 
 
 mongoose
@@ -44,3 +44,4 @@ mongoose
   app.use('/api/admin/auth',AdminRoutes)
   app.use('/api/category', CategoryRoutes)
   app.use('/api/reviews', ReviewRoutes)
+  app.use('/api/popularplaces', PopularPlacesRoutes)

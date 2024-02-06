@@ -16,6 +16,7 @@ import SectionDetails from "./pages/package/SectionDetails";
 import Reviews from "./pages/reviews/Reviews";
 import CreateReview from "./pages/reviews/CreateReview";
 import UpdateReview from "./pages/reviews/UpdateReview";
+import PopularPlaces from "./pages/popularplaces/PopularPlaces";
 
 
 function App() {
@@ -45,6 +46,7 @@ function App() {
                   <Route path="new" element={<CreateReview />} />
                   <Route path="update/:id" element={<UpdateReview />} />
                 </Route>
+                <Route path="/popularplaces" element={<PopularPlaces />} />
             </Route>
 
         

@@ -3,6 +3,7 @@ import axiosInstance from "../utils/axiosInstance"
 import { MyContext } from "../context/Context"
 import CropEasy from "../utils/crop/CropEasy"
 import ClipLoader from "react-spinners/ClipLoader"
+import axios from "axios"
 
 
 export const CreatePackageLocation = ({setOpenCreateLocation, openCreateLocation}) => {
@@ -40,7 +41,7 @@ export const CreatePackageLocation = ({setOpenCreateLocation, openCreateLocation
           data.append("file", file);
           data.append("upload_preset", "upload");
 
-          const uploadRes = await axiosInstance.post(
+          const uploadRes = await axios.post(
             "https://api.cloudinary.com/v1_1/difxlqrlc/image/upload",
             data
           );

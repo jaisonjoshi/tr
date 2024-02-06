@@ -42,6 +42,21 @@ const Sidebar = () => {
                 </ul>
             </div>
 
+
+
+            <h1 className=" text-lg font-bold px-4 py-4  ">Popular places</h1>
+            <div>
+                <ul className="">
+                    <Link to="/popularplaces">
+                    <li className="pl-8 py-2 cursor-pointer hover:bg-[#1A2342]">
+                        Popular places list
+                    </li></Link>
+                   
+                   
+                </ul>
+            </div>
+
+
         </div>
       </div>
     </div>
