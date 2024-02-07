@@ -197,11 +197,17 @@ export const LocationTags = ({locationTagsOpen, setLocationTagsOpen, pack, reFet
                   onClick={()=> setLocationSelectBoxOpen(true)}
                   onChange={handleSetSearch}
                 />
-                {locationSelectBoxOpen && locations && locations.length >0 &&  <div ref={locationSelectBox} className="absolute top-[100%]  py-2  left-0 right-0 min-h-[150px] max-h-[150px] overflow-auto shadow-xl">
+                {locationSelectBoxOpen && locations  &&  <div ref={locationSelectBox} className="absolute top-[100%]  py-2  left-0 right-0 min-h-[150px] max-h-[150px] overflow-auto shadow-xl">
                    <ul>
                     {locations && locations?.map((item, index)=>(
                         <li className="flex gap-4 items-center py-1 px-4 hover:bg-[#eaeaea] cursor-pointer" onClick={()=>handleAddLocation(item.location, item.img)}><img src={item.img} alt="" className="w-20"/>{item.location} </li>
                     ))}
+                    {
+                      locations.length == 0 && 
+                      <li className="flex gap-4 items-center py-1 px-4 hover:bg-[#eaeaea] cursor-pointer" >No locations found! </li>
+
+
+                    }
                     
                    </ul>
                 </div>}
@@ -211,7 +217,7 @@ export const LocationTags = ({locationTagsOpen, setLocationTagsOpen, pack, reFet
 
                 <div>
                 <button
-                  className="bg-bg w-full flex items-center gap-4 justify-center py-4 cursor-pointer rounded text-[white]" onClick={handleSubmit}
+                  className="bg-bg w-full mt-[200px] flex items-center gap-4 justify-center py-4 cursor-pointer rounded text-[white]" onClick={handleSubmit}
                 >
                   Update Location Tags
                   {updateLocationTagsLoading && <ClipLoader color="white" size={24} />}

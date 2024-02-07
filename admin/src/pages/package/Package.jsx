@@ -276,7 +276,7 @@ const Package = () => {
                         <h1 className="mb-4 font-medium">Location Tags</h1>
                         <div className="flex flex-wrap gap-[5%]">
                         {pack.locationTags?.map((item,index)=>(
-                            <div className="bg-bg text-[white] font-bold gap-4 rounded overflow-hidden pr-4  flex items-center">
+                            <div className="bg-bg text-[white] font-bold gap-4 mb-4 rounded overflow-hidden pr-4  flex items-center">
                                 <img src={item.img} alt="" className="w-[100px] skeleton aspect-video"/> <h1>{capitaliseFirstLetter(item.location)}</h1>
                             </div>
                             ))}

@@ -32,8 +32,9 @@ export const CreatePackageLocation = ({setOpenCreateLocation, openCreateLocation
       };
     const handleSubmit = async (e) => {
         e.preventDefault()
-        setNewLocationLoading(true)
+        
         try {
+          setNewLocationLoading(true)
             let url =
           "https://res.cloudinary.com/difxlqrlc/image/upload/v1702213948/site/lwxn98cm18bncsmq89nr.jpg";
         if (file != "") {
@@ -48,20 +49,32 @@ export const CreatePackageLocation = ({setOpenCreateLocation, openCreateLocation
 
           url = uploadRes.data.url;
 
-          const loc = {
-            location:location.toLowerCase(),
-            img:url
-
-          }
-          const res= await axiosInstance.post('/packagelocations', loc)
-          setOpenCreateLocation(false)
-          setNotificationMessage("New location added successfully")
-     
+          
 
         }
+        const loc = {
+          location:location.toLowerCase(),
+          img:url
+
+        }
+        const res= await axiosInstance.post('/packagelocations', loc)
+        setOpenCreateLocation(false)
+        setNotificationMessage("New location added successfully")
+        setNewLocationLoading(false)
+        document.getElementById("newLoc").reset();
+        setFile("");
             
         } catch (error) {
-            alert(error)
+          if (error.response && error.response.status === 409) {
+            alert("Location already exists!"); // Display a specific message for 409 error
+          } else {
+            console.error(error); // Log the error for other status codes or unexpected errors
+          }
+        
+          setOpenCreateLocation(false);
+          setNewLocationLoading(false);
+          document.getElementById("newLoc").reset();
+          setFile("");
         }
 
     }
@@ -90,7 +103,7 @@ export const CreatePackageLocation = ({setOpenCreateLocation, openCreateLocation
                 <img src="/images/icons/Close.png" alt="" className="w-8 cursor-pointer" onClick={()=>setOpenCreateLocation(false)}/>
                 </div>
                 <div>
-                    <form action=" " onSubmit={handleSubmit}>
+                    <form action=" " onSubmit={handleSubmit} id="newLoc">
                         <div className="flex flex-col mt-12 gap-2 w-full">
                             <label htmlFor="" className="text-lg">Location</label>
                             <input id="location"  onChange={handleChange} type="text" className="bg-[#f2f2f2] py-3 px-4 rounded"/>
