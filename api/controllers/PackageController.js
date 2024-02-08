@@ -3,13 +3,37 @@ const Package = require('../models/travelPackages')
 
 
 
-const getPackages =  async (req, res) => {
-    const {uploaded} = req.query
-     const query = {}
-    if(uploaded) query.uploaded = uploaded;
-    const packages =  await Package.find(query)
-    res.status(200).json(packages)
-}
+const getPackages = async (req, res) => {
+    try {
+        const { uploaded, locationtag } = req.query;
+        
+        // Build the query object based on parameters
+        const query = {};
+        
+        if (uploaded) {
+            query.uploaded = uploaded;
+        }
+        
+        if (locationtag) {
+            query.locationTags = { $elemMatch: { location: locationtag } };
+        }
+
+        console.log(query);
+
+        // Use async/await with try-catch for better error handling
+        const packages = await Package.find(query);
+        
+        res.status(200).json(packages);
+    } catch (error) {
+        // Handle any errors that occur during the execution
+        console.error('Error in getPackages:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+};
+
+// Assuming you have a global error handler middleware for uncaught errors.
+// If not, you might want to consider adding one to handle unexpected errors.
+
 
 const getSimplifiedPackages = async (req,res) => {
     const packages = await Package.find({}).select('_id title titleImage').lean()
